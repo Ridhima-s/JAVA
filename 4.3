@@ -1,0 +1,57 @@
+import java.util.Arrays;
+
+public class MatrixRotation {
+
+    // Method to rotate an N x N matrix 90 degrees clockwise
+    public static void rotateMatrix90DegreesClockwise(int[][] matrix) {
+        int n = matrix.length; // The size of the matrix (N x N)
+
+        // Step 1: Transpose the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                // Swap element (i, j) with element (j, i)
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+
+        // Step 2: Reverse the columns
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n / 2; j++) {
+                // Swap element (i, j) with element (i, n - j - 1)
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][n - j - 1];
+                matrix[i][n - j - 1] = temp;
+            }
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        // Example N x N matrix
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+
+        // Print the original matrix
+        System.out.println("Original matrix:");
+        printMatrix(matrix);
+
+        // Rotate the matrix 90 degrees clockwise
+        rotateMatrix90DegreesClockwise(matrix);
+
+        // Print the rotated matrix
+        System.out.println("\nMatrix rotated 90 degrees clockwise:");
+        printMatrix(matrix);
+    }
+
+    // Helper method to print an N x N matrix
+    public static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+}
