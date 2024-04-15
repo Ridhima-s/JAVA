@@ -1,0 +1,72 @@
+import java.security.SecureRandom;
+
+public class PasswordGenerator {
+
+    // Define character sets
+    private static final String UPPERCASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String LOWERCASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
+    private static final String NUMBERS = "0123456789";
+    private static final String SPECIAL_CHARACTERS = "!@#$%^&*()-_+=<>?";
+
+    // Method to generate a random password
+    public static String generatePassword(int length, boolean includeUppercase, boolean includeLowercase,
+                                           boolean includeNumbers, boolean includeSpecialCharacters) {
+        // Create a pool of characters based on the specified character sets
+        StringBuilder characterPool = new StringBuilder();
+        if (includeUppercase) {
+            characterPool.append(UPPERCASE_LETTERS);
+        }
+        if (includeLowercase) {
+            characterPool.append(LOWERCASE_LETTERS);
+        }
+        if (includeNumbers) {
+            characterPool.append(NUMBERS);
+        }
+        if (includeSpecialCharacters) {
+            characterPool.append(SPECIAL_CHARACTERS);
+        }
+
+        // Ensure that there is at least one character set specified
+        if (characterPool.length() == 0) {
+            throw new IllegalArgumentException("At least one character set must be specified (uppercase, lowercase, numbers, special).");
+        }
+
+        // Use SecureRandom for generating random numbers
+        SecureRandom random = new SecureRandom();
+        StringBuilder password = new StringBuilder();
+
+        // Generate the password
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(characterPool.length());
+            char randomChar = characterPool.charAt(randomIndex);
+            password.append(randomChar);
+        }
+
+        return password.toString();
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        // Check the number of command-line arguments
+        if (args.length < 2) {
+            System.out.println("Usage: java PasswordGenerator <length> <character sets>");
+            System.out.println("Character sets: uppercase, lowercase, numbers, special");
+            return;
+        }
+
+        try {
+            // Parse the length of the password
+            int length = Integer.parseInt(args[0]);
+            // Check if the length is valid
+            if (length <= 0) {
+                throw new IllegalArgumentException("Password length must be greater than 0.");
+            }
+
+            // Determine which character sets to include
+            boolean includeUppercase = false;
+            boolean includeLowercase = false;
+            boolean includeNumbers = false;
+            boolean includeSpecialCharacters = false;
+
+            // Process the character set arguments
+            for (int i = 
