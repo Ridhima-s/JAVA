@@ -1,0 +1,76 @@
+public class MagicSquareChecker {
+
+    // Method to check if a given square matrix is a magic square
+    public static boolean isMagicSquare(int[][] matrix) {
+        int size = matrix.length;
+
+        // Calculate the target sum (sum of the first row)
+        int targetSum = 0;
+        for (int j = 0; j < size; j++) {
+            targetSum += matrix[0][j];
+        }
+
+        // Check the sum of each row
+        for (int i = 1; i < size; i++) {
+            int rowSum = 0;
+            for (int j = 0; j < size; j++) {
+                rowSum += matrix[i][j];
+            }
+            if (rowSum != targetSum) {
+                return false;
+            }
+        }
+
+        // Check the sum of each column
+        for (int j = 0; j < size; j++) {
+            int columnSum = 0;
+            for (int i = 0; i < size; i++) {
+                columnSum += matrix[i][j];
+            }
+            if (columnSum != targetSum) {
+                return false;
+            }
+        }
+
+        // Check the sum of the main diagonal (top-left to bottom-right)
+        int mainDiagonalSum = 0;
+        for (int i = 0; i < size; i++) {
+            mainDiagonalSum += matrix[i][i];
+        }
+        if (mainDiagonalSum != targetSum) {
+            return false;
+        }
+
+        // Check the sum of the secondary diagonal (top-right to bottom-left)
+        int secondaryDiagonalSum = 0;
+        for (int i = 0; i < size; i++) {
+            secondaryDiagonalSum += matrix[i][size - i - 1];
+        }
+        if (secondaryDiagonalSum != targetSum) {
+            return false;
+        }
+
+        // If all checks pass, the matrix is a magic square
+        return true;
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        // Example square matrix
+        int[][] matrix = {
+            {2, 7, 6},
+            {9, 5, 1},
+            {4, 3, 8}
+        };
+
+        // Check if the given square matrix is a magic square
+        boolean isMagicSquare = isMagicSquare(matrix);
+
+        // Display the result
+        if (isMagicSquare) {
+            System.out.println("The matrix is a magic square.");
+        } else {
+            System.out.println("The matrix is not a magic square.");
+        }
+    }
+}
