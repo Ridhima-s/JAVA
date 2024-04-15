@@ -1,0 +1,47 @@
+import java.util.Arrays;
+
+public class MatrixSums {
+
+    // Method to calculate and display the sum of each row and each column in a 2D matrix
+    public static void calculateSums(int[][] matrix) {
+        int numRows = matrix.length;
+        int numCols = matrix[0].length;
+
+        // Arrays to hold the sum of each row and each column
+        int[] rowSums = new int[numRows];
+        int[] columnSums = new int[numCols];
+
+        // Calculate the sum of each row and each column
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                rowSums[i] += matrix[i][j]; // Add the element to the current row sum
+                columnSums[j] += matrix[i][j]; // Add the element to the current column sum
+            }
+        }
+
+        // Display the sum of each row
+        System.out.println("Sum of each row:");
+        for (int i = 0; i < numRows; i++) {
+            System.out.println("Row " + (i + 1) + ": " + rowSums[i]);
+        }
+
+        // Display the sum of each column
+        System.out.println("\nSum of each column:");
+        for (int j = 0; j < numCols; j++) {
+            System.out.println("Column " + (j + 1) + ": " + columnSums[j]);
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        // Example 2D matrix
+        int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+
+        // Calculate and display the sum of each row and each column in the matrix
+        calculateSums(matrix);
+    }
+}
