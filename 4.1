@@ -1,0 +1,61 @@
+import java.util.Arrays;
+
+public class ArrayRotation {
+
+    // Method to rotate an array to the left by a given number of positions
+    public static void rotateLeft(int[] array, int positions) {
+        int length = array.length;
+        positions = positions % length; // Normalize the positions to avoid unnecessary full rotations
+        if (positions > 0) {
+            reverseArray(array, 0, positions - 1);
+            reverseArray(array, positions, length - 1);
+            reverseArray(array, 0, length - 1);
+        }
+    }
+
+    // Method to rotate an array to the right by a given number of positions
+    public static void rotateRight(int[] array, int positions) {
+        int length = array.length;
+        positions = positions % length; // Normalize the positions to avoid unnecessary full rotations
+        if (positions > 0) {
+            reverseArray(array, 0, length - 1 - positions);
+            reverseArray(array, length - positions, length - 1);
+            reverseArray(array, 0, length - 1);
+        }
+    }
+
+    // Helper method to reverse a portion of an array
+    public static void reverseArray(int[] array, int start, int end) {
+        while (start < end) {
+            int temp = array[start];
+            array[start] = array[end];
+            array[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        // Example array
+        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+        // Example inputs
+        int positions = 3; // Number of positions to rotate
+        String direction = "left"; // Direction of rotation ("left" or "right")
+
+        System.out.println("Original array: " + Arrays.toString(array));
+
+        // Rotate the array based on the specified direction
+        if (direction.equals("left")) {
+            rotateLeft(array, positions);
+        } else if (direction.equals("right")) {
+            rotateRight(array, positions);
+        } else {
+            System.out.println("Invalid rotation direction. Please specify 'left' or 'right'.");
+        }
+
+        // Print the rotated array
+        System.out.println("Rotated array: " + Arrays.toString(array));
+    }
+}
