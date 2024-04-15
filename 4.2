@@ -1,0 +1,53 @@
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class RemoveDuplicates {
+
+    // Method to remove duplicates from an array and return an array of unique elements
+    public static int[] removeDuplicates(int[] array) {
+        // Use a LinkedHashSet to preserve order and remove duplicates
+        Set<Integer> uniqueSet = new LinkedHashSet<>();
+        
+        // Add each element to the set, duplicates will be removed automatically
+        for (int element : array) {
+            uniqueSet.add(element);
+        }
+        
+        // Convert the set back to an array
+        int[] uniqueArray = new int[uniqueSet.size()];
+        int index = 0;
+        for (int element : uniqueSet) {
+            uniqueArray[index++] = element;
+        }
+        
+        return uniqueArray;
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        // Create a Scanner object to read input
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt the user to enter the length of the array
+        System.out.print("Enter the length of the array: ");
+        int length = scanner.nextInt();
+
+        // Create an array and prompt the user to enter the elements
+        int[] array = new int[length];
+        System.out.println("Enter the elements of the array:");
+        for (int i = 0; i < length; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        // Remove duplicates from the array
+        int[] uniqueArray = removeDuplicates(array);
+
+        // Print the array with unique elements
+        System.out.println("Array with unique elements: " + Arrays.toString(uniqueArray));
+
+        // Close the scanner
+        scanner.close();
+    }
+}
